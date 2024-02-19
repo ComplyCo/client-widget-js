@@ -1,0 +1,50 @@
+{
+  "name": "@complyco/client-web",
+  "version": "0.0.0",
+  "description": "ComplyCo's client web widget",
+  "repository": "https://github.com/ComplyCo/client-widget-js",
+  "contributors": [
+    "Stephen Demjanenko <stephen@complyco.com>"
+  ],
+  "main": "dist/complyco-client-web.cjs.js",
+  "module": "dist/complyco-client-web.esm.js",
+  "types": "dist/complyco-client-web.cjs.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    "./tasks": {
+      "module": "./tasks/dist/complyco-client-web-tasks.esm.js",
+      "import": "./tasks/dist/complyco-client-web-tasks.cjs.mjs",
+      "default": "./tasks/dist/complyco-client-web-tasks.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  
+  "files": [
+    "dist",
+    "tasks"
+  ],
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts",
+      "tasks/index.ts"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+  "dependencies": {
+    "@babel/runtime": "^7.23.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "eslint": "^8.0.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.0.0"
+  }
+}
