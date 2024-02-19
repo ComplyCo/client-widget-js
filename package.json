@@ -1,0 +1,18 @@
+{
+  "name": "complyco-client-widget",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@preconstruct/cli": "^2.8.3"
+  },
+  "scripts": {
+    "postinstall": "preconstruct dev",
+    "build": "preconstruct build"
+  },
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
