@@ -1,6 +1,6 @@
 {
   "name": "@complyco/client-web",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "ComplyCo's client web widget",
   "repository": "https://github.com/ComplyCo/client-widget-js",
   "contributors": [
@@ -21,7 +21,6 @@
     },
     "./package.json": "./package.json"
   },
-  
   "files": [
     "dist",
     "tasks"
@@ -35,7 +34,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "dependencies": {
     "@babel/runtime": "^7.23.2"
   },
