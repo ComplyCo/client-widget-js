@@ -22,20 +22,20 @@ export class ComplyCoAPIAuth {
     if (!this.getAuthPromise) {
       this.getAuthPromise = this.onGetAuthToken({ signal });
     }
-    await this.getAuthPromise;
+    return await this.getAuthPromise;
   }
 
   async authHeaders({ signal }: { signal?: AbortSignal }) {
     if (!this.getAuthPromise) {
       this.getAuthPromise = this.onGetAuthToken({ signal });
     }
-    const { token } = (await this.getAuthPromise) || {};
-    if (!token) {
+    const res = await this.getAuthPromise;
+    if (!res?.token) {
       throw new Error("Failed to get auth token");
     }
     return {
       "X-Preflight-Force": "1",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${res.token}`,
     };
   }
 }

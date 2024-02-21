@@ -1,4 +1,4 @@
-import { ParentIframeCommunicator } from "../iframe/communicator";
+import { ParentIframeCommunicator, ParentEventType } from "../iframe/communicator";
 import { type ComplyCoAPIAuth } from "../auth";
 import { getTasks } from "../api/getTasks";
 
@@ -34,6 +34,18 @@ function loadIframe({
   communicator = new ParentIframeCommunicator({
     eventHandlers: {
       // TODO: add onNeedsAuthorizationMessage support
+      onNeedsAuthorizationMessage: async (data) => {
+        const res = await apiAuth.checkAuth({});
+
+        if (res) {
+          communicator?.send({
+            type: ParentEventType.AUTHORIZATION,
+            payload: {
+              token: res.token,
+            },
+          });
+        }
+      },
       onResizeMessage: (data) => {
         if (onSizeChange) {
           onSizeChange({ size: data.payload.size });
