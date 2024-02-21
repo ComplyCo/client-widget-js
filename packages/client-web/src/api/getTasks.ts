@@ -52,12 +52,12 @@ export type GetTasksResponseBody = {
 };
 
 export async function getTasks({ auth, signal }: { auth: ComplyCoAPIAuth; signal?: AbortSignal }) {
+  const headers = await auth.authHeaders({ signal });
+
   const resp = await fetch(auth.clientUrl("/api/v1/tasks"), {
     method: "POST",
     credentials: "include",
-    headers: {
-      "X-Preflight-Force": "1",
-    },
+    headers: headers,
     signal,
   });
 
