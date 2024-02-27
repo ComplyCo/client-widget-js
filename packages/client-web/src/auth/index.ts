@@ -1,4 +1,4 @@
-type ComplyCoAPIAuthOptions = {
+export type ComplyCoAPIAuthOptions = {
   baseUrl: string;
   onGetAuthToken: (options: { signal?: AbortSignal }) => Promise<{ token: string } | undefined> | undefined;
 };

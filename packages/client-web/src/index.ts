@@ -1,1 +1,1 @@
-export * as Tasks from "./tasks";
+export * as Views from "./views";

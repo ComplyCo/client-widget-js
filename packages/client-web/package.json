@@ -14,21 +14,21 @@
     "node": ">=18"
   },
   "exports": {
-    "./tasks": {
-      "module": "./tasks/dist/complyco-client-web-tasks.esm.js",
-      "import": "./tasks/dist/complyco-client-web-tasks.cjs.mjs",
-      "default": "./tasks/dist/complyco-client-web-tasks.cjs.js"
+    "./views": {
+      "module": "./views/dist/complyco-client-web-views.esm.js",
+      "import": "./views/dist/complyco-client-web-views.cjs.mjs",
+      "default": "./views/dist/complyco-client-web-views.cjs.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
-    "tasks"
+    "views"
   ],
   "preconstruct": {
     "entrypoints": [
       "index.ts",
-      "tasks/index.ts"
+      "views/index.ts"
     ]
   },
   "scripts": {
