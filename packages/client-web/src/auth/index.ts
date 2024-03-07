@@ -19,10 +19,23 @@ export class ComplyCoAPIAuth {
   }
 
   async checkAuth({ signal }: { signal?: AbortSignal }) {
+    let promiseCreated = false;
     if (!this.getAuthPromise) {
       this.getAuthPromise = this.onGetAuthToken({ signal });
+      promiseCreated = true;
     }
-    return await this.getAuthPromise;
+    const promise = this.getAuthPromise; // Get a reference in case it changes due to a race condition
+
+    const res = await promise;
+    if (res?.token) {
+      return res;
+    }
+
+    if (!promiseCreated && this.getAuthPromise === promise && !signal?.aborted) {
+      this.getAuthPromise = this.onGetAuthToken({ signal });
+      return await this.getAuthPromise;
+    }
+    return res;
   }
 
   async authHeaders({ signal }: { signal?: AbortSignal }) {
