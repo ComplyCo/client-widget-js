@@ -1,5 +1,15 @@
 # @complyco/client-web
 
+## 3.0.0
+
+### Major Changes
+
+- e2a10ff: Introduce Views API and add view for displaying a single task
+
+### Patch Changes
+
+- 144f319: Support retries in checkAuth
+
 ## 2.0.0
 
 ### Major Changes
