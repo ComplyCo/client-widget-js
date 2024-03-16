@@ -26,6 +26,9 @@
   "preconstruct": {
     "packages": [
       "packages/*"
-    ]
+    ],
+    "exports": {
+      "importConditionDefaultExport": "default"
+    }
   }
 }

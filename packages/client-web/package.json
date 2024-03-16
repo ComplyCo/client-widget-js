@@ -14,6 +14,11 @@
     "node": ">=18"
   },
   "exports": {
+    ".": {
+      "module": "./dist/complyco-client-web.esm.js",
+      "import": "./dist/complyco-client-web.cjs.mjs",
+      "default": "./dist/complyco-client-web.cjs.js"
+    },
     "./views": {
       "module": "./views/dist/complyco-client-web-views.esm.js",
       "import": "./views/dist/complyco-client-web-views.cjs.mjs",
