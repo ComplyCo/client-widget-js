@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.0.0
+
+### Major Changes
+
+- cf2861e: Switch to the new /v1 UI paths
+
 ## 3.0.1
 
 ### Patch Changes
