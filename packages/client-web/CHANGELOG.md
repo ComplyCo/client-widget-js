@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.0.1
+
+### Patch Changes
+
+- acc680d: Export Iframe communicator
+
 ## 4.0.0
 
 ### Major Changes
