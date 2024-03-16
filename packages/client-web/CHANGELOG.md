@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 3.0.1
+
+### Patch Changes
+
+- 6ca530e: Fix built assets and provide a root level import for the package
+
 ## 3.0.0
 
 ### Major Changes
