@@ -13,7 +13,7 @@ export function initialize(options: InitializeOptions) {
   });
 
   const manager = new IframeManager({
-    path: `/tasks/${options.params.id}`,
+    path: `/v1/tasks/${options.params.id}`,
     apiAuth,
     events: {
       onLoad: options.onLoad,
