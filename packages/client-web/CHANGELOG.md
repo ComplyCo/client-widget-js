@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.1.0
+
+### Minor Changes
+
+- 5005b78: Add Consent view and export auth
+
 ## 4.0.1
 
 ### Patch Changes
