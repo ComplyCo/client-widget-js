@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.2.0
+
+### Minor Changes
+
+- ee89a90: Added complete event to IFrame
+
 ## 4.1.0
 
 ### Minor Changes
