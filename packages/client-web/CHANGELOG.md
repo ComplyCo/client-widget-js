@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.2.1
+
+### Patch Changes
+
+- 80ec16c: Add onComplete function to IFrame manager
+
 ## 4.2.0
 
 ### Minor Changes
