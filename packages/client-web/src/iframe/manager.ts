@@ -6,15 +6,11 @@ export type ShutdownErrorReason = {
   error: any;
 };
 
-export type ShutdownCompleteReason = {
-  reason: "complete";
-};
-
 export type ShutdownUserClosedReason = {
   reason: "userClosed";
 };
 
-export type ShutdownReason = ShutdownErrorReason | ShutdownCompleteReason | ShutdownUserClosedReason;
+export type ShutdownReason = ShutdownErrorReason | ShutdownUserClosedReason;
 
 export type IframeManagerOptions = {
   path: string;
@@ -22,6 +18,7 @@ export type IframeManagerOptions = {
   events: {
     onLoad: (_: { iframe: HTMLIFrameElement }) => void;
     onShutdown: (reason: ShutdownReason) => void;
+    onComplete: () => void;
     onResize?: (_: { size: "small" | "large" }) => void;
   };
 };
@@ -82,6 +79,9 @@ export default class IframeManager {
             reason: "userClosed",
           });
         },
+        onCompleteMessage: (data) => {
+          this.#complete();
+        },
         onChildDead: (reason: string) => {
           this.#shutdown({
             reason: "error",
@@ -116,6 +116,10 @@ export default class IframeManager {
   #shutdown(reason: ShutdownReason) {
     this.unmount();
     this.#options.events.onShutdown(reason);
+  }
+
+  #complete() {
+    this.#options.events.onComplete();
   }
 
   unmount() {

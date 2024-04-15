@@ -3,6 +3,7 @@ export enum ChildEventType {
   NEEDS_AUTHORIZATION = "needs_authorization",
   REQUEST_SIZE = "request_size",
   CLOSE = "close",
+  COMPLETE = "complete",
   HEALTH_RESPONSE = "health_response",
   VIEW_CHANGE = "view_change",
 }
@@ -28,6 +29,10 @@ type ChildCloseEvent = {
   type: ChildEventType.CLOSE;
 };
 
+type ChildCompleteEvent = {
+  type: ChildEventType.COMPLETE;
+};
+
 type ChildHealthResponseEvent = {
   type: ChildEventType.HEALTH_RESPONSE;
   payload: HealthPayload;
@@ -41,6 +46,7 @@ type ChildEvent =
   | ChildNeedsAuthorizationEvent
   | ChildRequestSizeEvent
   | ChildCloseEvent
+  | ChildCompleteEvent
   | ChildHealthResponseEvent
   | ChildViewChangeEvent;
 
@@ -75,6 +81,7 @@ type ParentIframeCommunicatorOptions = {
     onNeedsAuthorizationMessage?: (data: ChildNeedsAuthorizationEvent) => void;
     onResizeMessage?: (data: ChildRequestSizeEvent) => void;
     onCloseMessage?: (data: ChildCloseEvent) => void;
+    onCompleteMessage?: (data: ChildCompleteEvent) => void;
     onChildDead?: (reason: string) => void;
     onLoaded?: () => void;
   };
@@ -128,6 +135,8 @@ export class ParentIframeCommunicator {
           this.eventHandlers?.onResizeMessage && this.eventHandlers.onResizeMessage(event.data);
         } else if (event.data.type === ChildEventType.CLOSE) {
           this.eventHandlers?.onCloseMessage && this.eventHandlers.onCloseMessage(event.data);
+        } else if (event.data.type === ChildEventType.COMPLETE) {
+          this.eventHandlers?.onCompleteMessage && this.eventHandlers.onCompleteMessage(event.data);
         } else if (event.data.type === ChildEventType.VIEW_CHANGE) {
           this.handleChildViewChange(event.data);
         } else if (event.data.type === ChildEventType.HEALTH_RESPONSE) {
