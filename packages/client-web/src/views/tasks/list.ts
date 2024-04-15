@@ -20,6 +20,7 @@ export function initialize(options: InitializeOptions) {
       onLoad: options.onLoad,
       onShutdown: options.onShutdown,
       onResize: options.onResize,
+      onComplete: options.onComplete,
     },
   });
 
