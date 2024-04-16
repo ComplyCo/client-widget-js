@@ -18,7 +18,7 @@ type SizePayload = {
   size: "small" | "large";
 };
 
-type CompletePayload = {
+export type CompletePayload = {
   lastHumanAction: StateType.Scrolled | StateType.Accepted | StateType.Rejected | StateType.Signed | undefined;
   isTerminalAction: boolean;
 };
@@ -36,7 +36,7 @@ type ChildCloseEvent = {
   type: ChildEventType.CLOSE;
 };
 
-type ChildCompleteEvent = {
+export type ChildCompleteEvent = {
   type: ChildEventType.COMPLETE;
   payload: CompletePayload;
 };

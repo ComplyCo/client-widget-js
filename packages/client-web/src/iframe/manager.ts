@@ -1,5 +1,5 @@
 import { ComplyCoAPIAuth } from "../auth";
-import { ParentIframeCommunicator, ParentEventType } from "./communicator";
+import { ParentIframeCommunicator, ParentEventType, type CompletePayload, type ChildCompleteEvent } from "./communicator";
 
 export type ShutdownErrorReason = {
   reason: "error";
@@ -18,7 +18,7 @@ export type IframeManagerOptions = {
   events: {
     onLoad: (_: { iframe: HTMLIFrameElement }) => void;
     onShutdown: (reason: ShutdownReason) => void;
-    onComplete: () => void;
+    onComplete: (payload: CompletePayload) => void;
     onResize?: (_: { size: "small" | "large" }) => void;
   };
 };
@@ -79,8 +79,8 @@ export default class IframeManager {
             reason: "userClosed",
           });
         },
-        onCompleteMessage: (data) => {
-          this.#complete();
+        onCompleteMessage: (event: ChildCompleteEvent) => {
+          this.#complete(event.payload);
         },
         onChildDead: (reason: string) => {
           this.#shutdown({
@@ -118,8 +118,8 @@ export default class IframeManager {
     this.#options.events.onShutdown(reason);
   }
 
-  #complete() {
-    this.#options.events.onComplete();
+  #complete(data: CompletePayload) {
+    this.#options.events.onComplete(data);
   }
 
   unmount() {
