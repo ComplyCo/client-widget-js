@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.2.3
+
+### Patch Changes
+
+- 4b84267: Add payload to onComplete function
+
 ## 4.2.2
 
 ### Patch Changes
