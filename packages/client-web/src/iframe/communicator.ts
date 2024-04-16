@@ -1,3 +1,5 @@
+import { StateType } from "../api/getTasks";
+
 // Events sent from the child iframe to the parent iframe
 export enum ChildEventType {
   NEEDS_AUTHORIZATION = "needs_authorization",
@@ -16,6 +18,11 @@ type SizePayload = {
   size: "small" | "large";
 };
 
+type CompletePayload = {
+  lastHumanAction: StateType.Scrolled | StateType.Accepted | StateType.Rejected | StateType.Signed | undefined;
+  isTerminalAction: boolean;
+};
+
 type ChildNeedsAuthorizationEvent = {
   type: ChildEventType.NEEDS_AUTHORIZATION;
 };
@@ -31,6 +38,7 @@ type ChildCloseEvent = {
 
 type ChildCompleteEvent = {
   type: ChildEventType.COMPLETE;
+  payload: CompletePayload;
 };
 
 type ChildHealthResponseEvent = {
