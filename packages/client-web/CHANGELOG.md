@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.2.2
+
+### Patch Changes
+
+- 3d267fe: Add payload to child complete event
+
 ## 4.2.1
 
 ### Patch Changes
