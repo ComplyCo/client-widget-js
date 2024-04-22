@@ -20,6 +20,7 @@ export type IframeManagerOptions = {
     onShutdown: (reason: ShutdownReason) => void;
     onComplete: (payload: CompletePayload) => void;
     onResize?: (_: { size: "small" | "large" }) => void;
+    onHeartbeatAge?: (ageMs: number) => void;
   };
 };
 export default class IframeManager {
@@ -72,6 +73,11 @@ export default class IframeManager {
         onResizeMessage: (data) => {
           if (this.#options.events.onResize) {
             this.#options.events.onResize({ size: data.payload.size });
+          }
+        },
+        onChildHeartbeatAge: (data: number) => {
+          if (this.#options.events.onHeartbeatAge) {
+            this.#options.events.onHeartbeatAge(data);
           }
         },
         onCloseMessage: (data) => {

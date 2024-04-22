@@ -90,6 +90,7 @@ type ParentIframeCommunicatorOptions = {
     onResizeMessage?: (data: ChildRequestSizeEvent) => void;
     onCloseMessage?: (data: ChildCloseEvent) => void;
     onCompleteMessage?: (data: ChildCompleteEvent) => void;
+    onChildHeartbeatAge?: (ageMs: number) => void;
     onChildDead?: (reason: string) => void;
     onLoaded?: () => void;
   };
@@ -110,6 +111,7 @@ export class ParentIframeCommunicator {
   // NOTE: This uses some terms from TCP, but it's not a real TCP connection
   healthCheckAckId: number;
   healthCheckSynId: number;
+  healthCheckAckTime: Date | undefined;
   healthCheckFailuresBeforeDead: number;
   handleChildIframeMessage: (event: MessageEvent<ChildEvent>) => void;
   childViewChanged = false;
@@ -158,6 +160,7 @@ export class ParentIframeCommunicator {
 
   handleHealthResponse(event: ChildHealthResponseEvent) {
     this.healthCheckAckId = Math.max(this.healthCheckAckId, event.payload.id);
+    this.healthCheckAckTime = new Date();
   }
 
   handleChildViewChange(event: ChildViewChangeEvent) {
@@ -183,16 +186,15 @@ export class ParentIframeCommunicator {
     if (this.healthCheckIntervalMs > 0) {
       this.healthCheckInterval = setInterval(() => {
         try {
-          if (this.healthCheckSynId - this.healthCheckAckId > this.healthCheckFailuresBeforeDead) {
-            this.eventHandlers?.onChildDead && this.eventHandlers.onChildDead("Health check failed");
-          } else {
-            this.send({
-              type: ParentEventType.HEALTH_REQUEST,
-              payload: {
-                id: this.healthCheckSynId++,
-              },
-            });
+          if (this.healthCheckAckTime && this.eventHandlers?.onChildHeartbeatAge) {
+            this.eventHandlers.onChildHeartbeatAge(Date.now() - this.healthCheckAckTime.getTime());
           }
+          this.send({
+            type: ParentEventType.HEALTH_REQUEST,
+            payload: {
+              id: this.healthCheckSynId++,
+            },
+          });
         } catch (e) {
           console.error("Error sending health check", e);
         }

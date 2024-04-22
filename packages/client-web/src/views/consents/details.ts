@@ -20,6 +20,7 @@ export function initialize(options: InitializeOptions) {
       onShutdown: options.onShutdown,
       onResize: options.onResize,
       onComplete: options.onComplete,
+      onHeartbeatAge: options.onHeartbeatAge,
     },
   });
 
