@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 4.3.0
+
+### Minor Changes
+
+- 9ceda0c: Add heartbeat failed event callback
+
 ## 4.2.3
 
 ### Patch Changes
