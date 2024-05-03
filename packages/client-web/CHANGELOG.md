@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 5.0.0
+
+### Major Changes
+
+- 971990e: Require iframe to be passed when initializing
+
 ## 4.3.0
 
 ### Minor Changes
