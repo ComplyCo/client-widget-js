@@ -1,5 +1,10 @@
 import { ComplyCoAPIAuth } from "../auth";
-import { ParentIframeCommunicator, ParentEventType, type CompletePayload, type ChildCompleteEvent } from "./communicator";
+import {
+  ParentIframeCommunicator,
+  ParentEventType,
+  type CompletePayload,
+  type ChildCompleteEvent,
+} from "./communicator";
 
 export type ShutdownErrorReason = {
   reason: "error";
@@ -15,6 +20,7 @@ export type ShutdownReason = ShutdownErrorReason | ShutdownUserClosedReason;
 export type IframeManagerOptions = {
   path: string;
   apiAuth: ComplyCoAPIAuth;
+  iframe: HTMLIFrameElement;
   events: {
     onLoad: (_: { iframe: HTMLIFrameElement }) => void;
     onShutdown: (reason: ShutdownReason) => void;
@@ -33,11 +39,8 @@ export default class IframeManager {
   }
 
   #initIframe() {
-    // TODO: Make sure 2 Iframes are not created
-    const iframe = document.createElement("iframe");
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.display = "none";
+    // NOTE: the caller should manage the iframe's visibility
+    const iframe = this.#options.iframe;
     iframe.src = this.#options.apiAuth.clientUrl(this.#options.path);
 
     iframe.onerror = (event, source, lineno, number, error) => {
@@ -48,7 +51,6 @@ export default class IframeManager {
     };
 
     this.#iframe = iframe;
-    document.body.appendChild(iframe);
   }
 
   #initCommunicator() {
@@ -132,7 +134,9 @@ export default class IframeManager {
     if (this.#communicator) {
       this.#communicator.removeListeners();
     }
-    this.#iframe?.parentNode?.removeChild(this.#iframe);
+    if (this.#iframe) {
+      this.#iframe.src = "";
+    }
     // TODO: Figure out if we need to clear out the iframe and communicator
   }
 }

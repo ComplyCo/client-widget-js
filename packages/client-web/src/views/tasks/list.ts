@@ -16,6 +16,7 @@ export function initialize(options: InitializeOptions) {
   const manager = new IframeManager({
     path: "/v1/tasks",
     apiAuth,
+    iframe: options.iframe,
     events: {
       onLoad: options.onLoad,
       onShutdown: options.onShutdown,
