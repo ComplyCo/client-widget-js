@@ -51,4 +51,9 @@ export class ComplyCoAPIAuth {
       Authorization: `Bearer ${res.token}`,
     };
   }
+
+  clearAuth() {
+    // NOTE: This doesn't abort currently awaiting promises
+    this.getAuthPromise = undefined;
+  }
 }
