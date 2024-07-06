@@ -1,5 +1,11 @@
 # @complyco/client-web
 
+## 5.1.0
+
+### Minor Changes
+
+- e8d4092: Expose API methods and add methods for getDocuments and postConsentTransitions
+
 ## 5.0.0
 
 ### Major Changes
