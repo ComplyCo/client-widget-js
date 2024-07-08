@@ -1,6 +1,6 @@
 {
   "name": "@complyco/client-recorder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ComplyCo's client web recorder",
   "repository": "https://github.com/ComplyCo/client-widget-js",
   "contributors": [
