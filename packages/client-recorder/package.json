@@ -24,17 +24,24 @@
       "import": "./plugins/dist/complyco-client-recorder-plugins.cjs.mjs",
       "default": "./plugins/dist/complyco-client-recorder-plugins.cjs.js"
     },
+    "./semantics": {
+      "module": "./semantics/dist/complyco-client-recorder-semantics.esm.js",
+      "import": "./semantics/dist/complyco-client-recorder-semantics.cjs.mjs",
+      "default": "./semantics/dist/complyco-client-recorder-semantics.cjs.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
     "plugins",
+    "semantics",
     "README.md"
   ],
   "preconstruct": {
     "entrypoints": [
       "index.ts",
-      "plugins/index.ts"
+      "plugins/index.ts",
+      "semantics/index.ts"
     ]
   },
   "scripts": {
