@@ -18,6 +18,7 @@ export type EventSaverOptions = {
   plugins?: Plugin[];
   syncPeriodMs?: number;
   retryCount?: number;
+  onError?: (error: Error) => void;
 };
 
 class EventSaver {
@@ -30,6 +31,7 @@ class EventSaver {
   retryCount: number;
   pageloadId: string;
   #cachedTokenPromise: Promise<{ token: string } | undefined> | undefined;
+  #onError: ((error: Error) => void) | undefined;
 
   constructor(options: EventSaverOptions) {
     this.baseUrl = options.baseUrl;
@@ -40,6 +42,7 @@ class EventSaver {
     this.batches = new Map();
     this.retryCount = options.retryCount || DEFAULT_RETRY_COUNT;
     this.pageloadId = options.pageloadId;
+    this.#onError = options.onError;
   }
 
   addEvent(event: Event) {
@@ -63,9 +66,16 @@ class EventSaver {
     return this.#save(batchId);
   }
 
+  #logAndThrowError(err: Error): never {
+    if (this.#onError) {
+      this.#onError(err);
+    }
+    throw err;
+  }
+
   #ensureCachedToken() {
     if (this.onAuthTokenRequested === undefined) {
-      throw new Error("onAuthTokenRequested is undefined");
+      this.#logAndThrowError(new Error("onAuthTokenRequested is undefined"));
     }
 
     if (this.#cachedTokenPromise) {
@@ -75,7 +85,7 @@ class EventSaver {
     this.#cachedTokenPromise = this.onAuthTokenRequested({});
 
     if (!this.#cachedTokenPromise) {
-      throw new Error("OnAuthTokenRequested returned an empty value");
+      this.#logAndThrowError(new Error("OnAuthTokenRequested returned an empty value"));
     }
 
     return;
@@ -98,7 +108,7 @@ class EventSaver {
     try {
       const value = await this.#cachedTokenPromise;
       if (!value) {
-        throw new Error("onAuthTokenRequested's Promise returned an empty value");
+        this.#logAndThrowError(new Error("onAuthTokenRequested's Promise returned an empty value"));
       }
 
       const body = JSON.stringify({
@@ -133,10 +143,12 @@ class EventSaver {
           }
         } else {
           batch.status = BatchSyncStatus.Failed;
-          throw new Error("Failed to save to server");
+          this.batches.delete(batch.batchId);
+          this.#logAndThrowError(new Error("Failed to save to server"));
         }
       }
       batch.status = BatchSyncStatus.Success;
+      this.batches.delete(batch.batchId);
     } catch (error) {
       if (retryCount > 0) {
         // Retry after a delay
@@ -144,7 +156,8 @@ class EventSaver {
         return this.#save(batchId, retryCount - 1);
       } else {
         batch.status = BatchSyncStatus.Failed;
-        throw error;
+        this.batches.delete(batch.batchId);
+        this.#logAndThrowError(error as Error);
       }
     }
   }

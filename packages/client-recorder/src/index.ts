@@ -22,11 +22,18 @@ class ClientRecorder {
 
   constructor(options: ClientRecorderOptions) {
     this.#pageloadId = window.crypto.randomUUID();
+    this.#onError = (error: Error) => {
+      // TODO: decide if we want to wrap errors in a custom error type
+      if (options.onError) {
+        options.onError(error);
+      }
+    };
+
     this.#eventSaver = new EventSaver({
       ...options.syncOptions,
       pageloadId: this.#pageloadId,
+      onError: this.#onError,
     });
-    this.#onError = options.onError;
   }
 
   record(options: RecordOptions = {}) {
