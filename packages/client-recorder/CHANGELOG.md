@@ -1,5 +1,11 @@
 # @complyco/client-recorder
 
+## 0.1.2
+
+### Patch Changes
+
+- 62a25c8: Add semantic html prop exports
+
 ## 0.1.1
 
 ### Patch Changes
