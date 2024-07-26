@@ -21,7 +21,7 @@ export type IframeManagerOptions = {
   path: string;
   apiAuth: ComplyCoAPIAuth;
   events: {
-    onLoad: (_: { iframe: HTMLIFrameElement }) => void;
+    onLoad?: (_: { iframe: HTMLIFrameElement }) => void;
     onStarted?: () => void;
     onShutdown: (reason: ShutdownReason) => void;
     onComplete: (payload: CompletePayload) => void;
