@@ -16,9 +16,9 @@ export function initialize(options: InitializeOptions) {
   const manager = new IframeManager({
     path: "/v1/tasks",
     apiAuth,
-    iframe: options.iframe,
     events: {
       onLoad: options.onLoad,
+      onStarted: options.onStarted,
       onShutdown: options.onShutdown,
       onResize: options.onResize,
       onComplete: options.onComplete,
@@ -37,7 +37,7 @@ export function initialize(options: InitializeOptions) {
       })
       .then((json) => {
         if (json && json.data.tasks.length > 0) {
-          return manager.run();
+          return manager.start(options.iframe);
         }
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ export function initialize(options: InitializeOptions) {
       });
   } else {
     try {
-      manager.run();
+      manager.start(options.iframe);
     } catch (err) {
       if (options.onError) {
         options.onError(err);
@@ -56,6 +56,7 @@ export function initialize(options: InitializeOptions) {
   }
 
   return {
+    run: manager.run,
     unmount: () => {
       // TODO: Figure out controller + signals for cancellation
       manager.unmount();

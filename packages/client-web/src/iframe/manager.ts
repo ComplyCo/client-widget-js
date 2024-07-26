@@ -20,9 +20,9 @@ export type ShutdownReason = ShutdownErrorReason | ShutdownUserClosedReason;
 export type IframeManagerOptions = {
   path: string;
   apiAuth: ComplyCoAPIAuth;
-  iframe: HTMLIFrameElement;
   events: {
     onLoad: (_: { iframe: HTMLIFrameElement }) => void;
+    onStarted?: () => void;
     onShutdown: (reason: ShutdownReason) => void;
     onComplete: (payload: CompletePayload) => void;
     onResize?: (_: { size: "small" | "large" }) => void;
@@ -38,9 +38,9 @@ export default class IframeManager {
     this.#options = options;
   }
 
-  #initIframe() {
+  #initIframe(iframe: HTMLIFrameElement) {
     // NOTE: the caller should manage the iframe's visibility
-    const iframe = this.#options.iframe;
+    // const iframe = this.#options.iframe;
     iframe.src = this.#options.apiAuth.clientUrl(this.#options.path);
 
     iframe.onerror = (event, source, lineno, number, error) => {
@@ -116,10 +116,19 @@ export default class IframeManager {
     this.#communicator = communicator;
   }
 
-  run() {
-    this.#initIframe();
-    this.#initCommunicator();
-  }
+  start = (iframe?: HTMLIFrameElement | undefined | null) => {
+    this.run(iframe);
+    if (this.#options.events.onStarted) {
+      this.#options.events.onStarted();
+    }
+  };
+
+  run = (iframe?: HTMLIFrameElement | undefined | null) => {
+    if (iframe) {
+      this.#initIframe(iframe);
+      this.#initCommunicator();
+    }
+  };
 
   #shutdown(reason: ShutdownReason) {
     this.unmount();

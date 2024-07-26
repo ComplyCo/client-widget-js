@@ -15,9 +15,9 @@ export function initialize(options: InitializeOptions) {
   const manager = new IframeManager({
     path: "/v1/overview",
     apiAuth,
-    iframe: options.iframe,
     events: {
       onLoad: options.onLoad,
+      onStarted: options.onStarted,
       onShutdown: options.onShutdown,
       onResize: options.onResize,
       onComplete: options.onComplete,
@@ -26,7 +26,7 @@ export function initialize(options: InitializeOptions) {
   });
 
   try {
-    manager.run();
+    manager.start(options.iframe);
   } catch (err) {
     if (options.onError) {
       options.onError(err);
@@ -34,6 +34,7 @@ export function initialize(options: InitializeOptions) {
   }
 
   return {
+    run: manager.run,
     unmount: () => {
       // TODO: Figure out controller + signals for cancellation
       manager.unmount();
