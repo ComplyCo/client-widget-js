@@ -28,7 +28,8 @@
   },
   "files": [
     "dist",
-    "views"
+    "views",
+    "README.md"
   ],
   "preconstruct": {
     "entrypoints": [
