@@ -1,0 +1,55 @@
+{
+  "name": "@complyco/client-core",
+  "version": "0.0.1",
+  "description": "ComplyCo's client core",
+  "repository": "https://github.com/ComplyCo/client-widget-js",
+  "contributors": [
+    "Stephen Demjanenko <stephen@complyco.com>"
+  ],
+  "main": "dist/complyco-client-core.cjs.js",
+  "module": "dist/complyco-client-core.esm.js",
+  "types": "dist/complyco-client-core.cjs.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "module": "./dist/complyco-client-core.esm.js",
+      "import": "./dist/complyco-client-core.cjs.mjs",
+      "default": "./dist/complyco-client-core.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.2.6",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/runtime": "^7.25.6",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "eslint": "^9.11.1",
+    "prettier": "3.3.3",
+    "react": "18.3.1",
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "5.6.2"
+  }
+}
