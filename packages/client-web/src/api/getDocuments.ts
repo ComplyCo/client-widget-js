@@ -1,4 +1,4 @@
-import { type ComplyCoAPIAuth } from "../auth";
+import { complycoApiRequest, type UseValidAuth} from "@complyco/client-core";
 import type { ConsentMachine } from "./types";
 
 export type GetDocumentsResponseBodyDocument = {
@@ -19,26 +19,13 @@ export type GetDocumentsResponseBody = {
 
 export async function getDocuments({
   ids,
-  auth,
+  getApiConfig,
   signal,
 }: {
   ids: string[];
-  auth: ComplyCoAPIAuth;
+  getApiConfig: UseValidAuth;
   signal?: AbortSignal;
 }) {
-  const headers = await auth.authHeaders({ signal });
-
-  const resp = await fetch(auth.clientUrl("/api/v1/documents"), {
-    method: "POST",
-    credentials: "include",
-    headers: headers,
-    signal,
-    body: JSON.stringify({ ids }),
-  });
-
-  if (!resp.ok) {
-    throw new Error("Failed to get documents");
-  }
-  const json = (await resp.json()) as GetDocumentsResponseBody;
-  return json;
+  const response = await complycoApiRequest(getApiConfig, `/api/v1/documents`);
+  return response.data;
 }

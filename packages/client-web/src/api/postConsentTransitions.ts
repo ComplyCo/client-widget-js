@@ -1,4 +1,4 @@
-import { type ComplyCoAPIAuth } from "../auth";
+import { complycoApiRequest, type UseValidAuth} from "@complyco/client-core";
 
 export type LoadedEvidence = {
   startTime: Date;
@@ -57,26 +57,16 @@ export type PostConsentTransitionsResponseBody = {
 
 export async function postConsentTransitions({
   body,
-  auth,
+  getApiConfig,
   signal,
 }: {
   body: PostConsentTransitionsRequestBody;
-  auth: ComplyCoAPIAuth;
+  getApiConfig: UseValidAuth;
   signal?: AbortSignal;
 }) {
-  const headers = await auth.authHeaders({ signal });
 
-  const resp = await fetch(auth.clientUrl(`/api/v1/document_consents/${body.id}/transitions`), {
-    method: "POST",
-    credentials: "include",
-    headers: headers,
-    signal,
-    body: JSON.stringify({ transitions: body.transitions }),
+  const result = await complycoApiRequest(getApiConfig, `/api/v1/document_consents/${body.id}/transitions`, {
+    transitions: body.transitions,
   });
-
-  if (!resp.ok) {
-    throw new Error("Failed to save consent transitions");
-  }
-  const json = (await resp.json()) as PostConsentTransitionsResponseBody;
-  return json;
+  return result.data;
 }
