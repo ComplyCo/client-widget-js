@@ -38,6 +38,7 @@ export class ComplyCoAPIAuth {
     return res;
   }
 
+  // Not sure how to handle signal
   async authHeaders({ signal }: { signal?: AbortSignal }) {
     if (!this.getAuthPromise) {
       this.getAuthPromise = this.onGetAuthToken({ signal });
