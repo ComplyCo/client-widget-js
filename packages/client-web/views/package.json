@@ -1,4 +1,0 @@
-{
-  "main": "dist/complyco-client-web-views.cjs.js",
-  "module": "dist/complyco-client-web-views.esm.js"
-}

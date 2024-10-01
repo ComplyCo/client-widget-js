@@ -1,4 +1,4 @@
-# @complyco/client-web
+# @complyco/client-documents-web
 
 ## 5.1.0
 

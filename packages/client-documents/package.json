@@ -1,13 +1,13 @@
 {
-  "name": "@complyco/client-web",
+  "name": "@complyco/client-documents-web",
   "version": "5.2.0",
-  "description": "ComplyCo's client web widget",
+  "description": "ComplyCo's client web document widget",
   "repository": "https://github.com/ComplyCo/client-widget-js",
   "contributors": [
     "Stephen Demjanenko <stephen@complyco.com>"
   ],
-  "main": "dist/complyco-client-web.cjs.js",
-  "module": "dist/complyco-client-web.esm.js",
+  "main": "dist/complyco-client-documents-web.cjs.js",
+  "module": "dist/complyco-client-documents-web.esm.js",
   "types": "dist/complyco-client-web.cjs.d.ts",
   "sideEffects": false,
   "engines": {
@@ -15,14 +15,14 @@
   },
   "exports": {
     ".": {
-      "module": "./dist/complyco-client-web.esm.js",
-      "import": "./dist/complyco-client-web.cjs.mjs",
-      "default": "./dist/complyco-client-web.cjs.js"
+      "module": "./dist/complyco-client-documents-web.esm.js",
+      "import": "./dist/complyco-client-documents-web.cjs.mjs",
+      "default": "./dist/complyco-client-documents-web.cjs.js"
     },
     "./views": {
-      "module": "./views/dist/complyco-client-web-views.esm.js",
-      "import": "./views/dist/complyco-client-web-views.cjs.mjs",
-      "default": "./views/dist/complyco-client-web-views.cjs.js"
+      "module": "./views/dist/complyco-client-documents-web-views.esm.js",
+      "import": "./views/dist/complyco-client-documents-web-views.cjs.mjs",
+      "default": "./views/dist/complyco-client-documents-web-views.cjs.js"
     },
     "./package.json": "./package.json"
   },

@@ -11,7 +11,7 @@ The client that you have registered in ComplyCO's dashboard should be configured
 for signing in your backend API.
 
 ```ts
-import { Overview } from "@complyco/client-web/views";
+import { Overview } from "@complyco/client-documents-web/views";
 
 const view = Overview.initialize({
   baseUrl,

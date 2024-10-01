@@ -1,4 +1,4 @@
 {
-  "main": "dist/complyco-client-recorder-semantics.cjs.js",
-  "module": "dist/complyco-client-recorder-semantics.esm.js"
+  "main": "dist/complyco-client-recorder-web-semantics.cjs.js",
+  "module": "dist/complyco-client-recorder-web-semantics.esm.js"
 }

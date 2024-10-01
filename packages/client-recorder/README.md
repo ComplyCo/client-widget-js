@@ -11,8 +11,8 @@ The client that you have registered in ComplyCO's dashboard should be configured
 for signing in your backend API.
 
 ```ts
-import { createClientRecorder } from "@complyco/client-recorder";
-import { GzipPlugin } from "@complyco/client-recorder/plugins";
+import { createClientRecorder } from "@complyco/client-recorder-web";
+import { GzipPlugin } from "@complyco/client-recorder-web/plugins";
 
 // initialize the recorder once for your pageload
 const recorder = createClientRecorder({
@@ -59,8 +59,8 @@ Use of plugins is optional, but they may offer performance improvements in certa
 ```tsx
 "use client";
 import { useState, useEffect } from "react";
-import { createClientRecorder } from "@complyco/client-recorder";
-import { GzipPlugin } from "@complyco/client-recorder/plugins";
+import { createClientRecorder } from "@complyco/client-recorder-web";
+import { GzipPlugin } from "@complyco/client-recorder-web/plugins";
 
 export type AuthTracerProviderProps = {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-# @complyco/client-recorder
+# @complyco/client-recorder-web
 
 ## 0.1.2
 

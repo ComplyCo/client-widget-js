@@ -1,13 +1,13 @@
 {
-  "name": "@complyco/client-recorder",
+  "name": "@complyco/client-recorder-web",
   "version": "0.1.2",
   "description": "ComplyCo's client web recorder",
   "repository": "https://github.com/ComplyCo/client-widget-js",
   "contributors": [
     "Stephen Demjanenko <stephen@complyco.com>"
   ],
-  "main": "dist/complyco-client-recorder.cjs.js",
-  "module": "dist/complyco-client-recorder.esm.js",
+  "main": "dist/complyco-client-recorder-web.cjs.js",
+  "module": "dist/complyco-client-recorder-web.esm.js",
   "types": "dist/complyco-client-recorder.cjs.d.ts",
   "sideEffects": false,
   "engines": {
@@ -15,19 +15,19 @@
   },
   "exports": {
     ".": {
-      "module": "./dist/complyco-client-recorder.esm.js",
-      "import": "./dist/complyco-client-recorder.cjs.mjs",
-      "default": "./dist/complyco-client-recorder.cjs.js"
+      "module": "./dist/complyco-client-recorder-web.esm.js",
+      "import": "./dist/complyco-client-recorder-web.cjs.mjs",
+      "default": "./dist/complyco-client-recorder-web.cjs.js"
     },
     "./plugins": {
-      "module": "./plugins/dist/complyco-client-recorder-plugins.esm.js",
-      "import": "./plugins/dist/complyco-client-recorder-plugins.cjs.mjs",
-      "default": "./plugins/dist/complyco-client-recorder-plugins.cjs.js"
+      "module": "./plugins/dist/complyco-client-recorder-web-plugins.esm.js",
+      "import": "./plugins/dist/complyco-client-recorder-web-plugins.cjs.mjs",
+      "default": "./plugins/dist/complyco-client-recorder-web-plugins.cjs.js"
     },
     "./semantics": {
-      "module": "./semantics/dist/complyco-client-recorder-semantics.esm.js",
-      "import": "./semantics/dist/complyco-client-recorder-semantics.cjs.mjs",
-      "default": "./semantics/dist/complyco-client-recorder-semantics.cjs.js"
+      "module": "./semantics/dist/complyco-client-recorder-web-semantics.esm.js",
+      "import": "./semantics/dist/complyco-client-recorder-web-semantics.cjs.mjs",
+      "default": "./semantics/dist/complyco-client-recorder-web-semantics.cjs.js"
     },
     "./package.json": "./package.json"
   },

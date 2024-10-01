@@ -1,4 +1,4 @@
 {
-  "main": "dist/complyco-client-recorder-plugins.cjs.js",
-  "module": "dist/complyco-client-recorder-plugins.esm.js"
+  "main": "dist/complyco-client-recorder-web-plugins.cjs.js",
+  "module": "dist/complyco-client-recorder-web-plugins.esm.js"
 }
