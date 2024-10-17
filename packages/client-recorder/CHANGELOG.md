@@ -1,5 +1,11 @@
 # @complyco/client-recorder-web
 
+## 0.1.3
+
+### Patch Changes
+
+- fc6219e: Upgrade rrweb to latest
+
 ## 0.1.2
 
 ### Patch Changes
