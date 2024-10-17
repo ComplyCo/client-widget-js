@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
-    "rrweb": "2.0.0-alpha.14",
+    "@rrweb/record": "2.0.0-alpha.17",
     "fflate": "^0.8.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { record } from "rrweb";
+import { record } from "@rrweb/record";
 import type { AuthTokenRequestFn } from "./types";
 import EventSaver, { type EventSaverOptions, DEFAULT_EVENT_SYNC_INTERVAL_MS } from "./eventSaver";
 
