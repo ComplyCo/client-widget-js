@@ -70,7 +70,10 @@ class ClientRecorder {
       recordCanvas: false,
 
       emit(event) {
-        _this.#eventSaver.addEvent(event);
+        _this.#eventSaver.addEvent({
+          ...event,
+          timeEpochMS: event.timestamp,
+        });
       },
     });
 
