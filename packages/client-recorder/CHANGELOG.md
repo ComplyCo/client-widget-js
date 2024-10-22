@@ -1,5 +1,11 @@
 # @complyco/client-recorder-web
 
+## 0.1.4
+
+### Patch Changes
+
+- 4f8ef75: Add timeEpochMS field to recorded event
+
 ## 0.1.3
 
 ### Patch Changes
