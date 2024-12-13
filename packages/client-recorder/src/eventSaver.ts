@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import type { Plugin, AuthTokenRequestFn, RequestHeadersAndBody } from "./types";
 
 export const DEFAULT_EVENT_SYNC_INTERVAL_MS = 5_000;
@@ -54,7 +55,7 @@ class EventSaver {
       return;
     }
 
-    const batchId = window.crypto.randomUUID();
+    const batchId = uuidv4();
     this.batches.set(batchId, {
       batchId,
       pageloadId: this.pageloadId,

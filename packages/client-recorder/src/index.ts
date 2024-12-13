@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { record } from "@rrweb/record";
 import type { AuthTokenRequestFn } from "./types";
 import EventSaver, { type EventSaverOptions, DEFAULT_EVENT_SYNC_INTERVAL_MS } from "./eventSaver";
@@ -21,7 +22,7 @@ class ClientRecorder {
   #onError: ((error: Error) => void) | undefined; // TODO: Wire this up
 
   constructor(options: ClientRecorderOptions) {
-    this.#pageloadId = window.crypto.randomUUID();
+    this.#pageloadId = uuidv4();
     this.#onError = (error: Error) => {
       // TODO: decide if we want to wrap errors in a custom error type
       if (options.onError) {
