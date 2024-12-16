@@ -1,5 +1,11 @@
 # @complyco/client-recorder-web
 
+## 0.1.5
+
+### Patch Changes
+
+- 1310815: Switch to uuid library in order to avoid window.crypto.randomUUID issue on http
+
 ## 0.1.4
 
 ### Patch Changes
