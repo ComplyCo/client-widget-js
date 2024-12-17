@@ -1,5 +1,11 @@
 # @complyco/client-recorder-web
 
+## 0.1.6
+
+### Patch Changes
+
+- fd69ccb: Upgrade rrweb to alpha.18
+
 ## 0.1.5
 
 ### Patch Changes
