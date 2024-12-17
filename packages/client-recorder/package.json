@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
-    "@rrweb/record": "2.0.0-alpha.17",
+    "@rrweb/record": "2.0.0-alpha.18",
     "fflate": "^0.8.2",
     "uuid": "^11.0.0"
   },
