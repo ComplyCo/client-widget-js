@@ -48,7 +48,18 @@ class ClientRecorder {
     const stopFn = record({
       sampling: {
         mousemove: false,
-        mouseInteraction: false,
+        mouseInteraction: {
+          MouseUp: true,
+          MouseDown: true,
+          Click: true,
+          ContextMenu: false,
+          DblClick: true,
+          Focus: false,
+          Blur: false,
+          TouchStart: true,
+          TouchEnd: true,
+        },
+        scroll: 200,
         input: "last",
         canvas: 1,
       },
