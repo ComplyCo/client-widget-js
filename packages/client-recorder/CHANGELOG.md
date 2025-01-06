@@ -1,5 +1,11 @@
 # @complyco/client-recorder-web
 
+## 0.1.7
+
+### Patch Changes
+
+- b4238bc: Capture some mouse interaction events
+
 ## 0.1.6
 
 ### Patch Changes
