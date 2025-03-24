@@ -45,7 +45,7 @@
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: run tests out of the root\" && exit 1"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.0",
