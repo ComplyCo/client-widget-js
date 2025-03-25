@@ -52,7 +52,7 @@ describe("EventSaver", () => {
         headers: expect.objectContaining({
           Authorization: "Bearer test-token",
         }),
-      })
+      }),
     );
   });
 
@@ -67,7 +67,7 @@ describe("EventSaver", () => {
       expect.objectContaining({
         pageload_id: "test-pageload-id",
         events: [{ type: "test", data: "data" }],
-      })
+      }),
     );
   });
 
@@ -97,7 +97,7 @@ describe("EventSaver", () => {
         headers: expect.objectContaining({
           "X-Test": "test-value",
         }),
-      })
+      }),
     );
   });
 
