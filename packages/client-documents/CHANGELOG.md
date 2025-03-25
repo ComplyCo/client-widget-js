@@ -1,5 +1,12 @@
 # @complyco/client-documents-web
 
+## 5.2.1
+
+### Patch Changes
+
+- 05d5d71: Upgrade packages
+- 5b982ae: Upgrade packages for security
+
 ## 5.1.0
 
 ### Minor Changes

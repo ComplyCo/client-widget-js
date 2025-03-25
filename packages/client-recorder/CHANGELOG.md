@@ -1,5 +1,13 @@
 # @complyco/client-recorder-web
 
+## 0.1.8
+
+### Patch Changes
+
+- 05d5d71: Upgrade packages
+- 7fda6bf: Support recording prior to the setting of onAuthTokenRequested
+- 5b982ae: Upgrade packages for security
+
 ## 0.1.7
 
 ### Patch Changes
