@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { record } from "@rrweb/record";
+import type { RecordPlugin } from "@rrweb/types";
 import type { AuthTokenRequestFn } from "./types";
 import EventSaver, { type EventSaverOptions, DEFAULT_EVENT_SYNC_INTERVAL_MS } from "./eventSaver";
 
@@ -13,6 +14,53 @@ type RecordOptions = {
   blockClass?: string;
   ignoreClass?: string;
   maskTextClass?: string;
+  captureNavigation?: boolean;
+};
+
+const navigationPlugin: RecordPlugin<{}> = {
+  name: "complyco/navigation@1",
+  observer(cb, options) {
+    // Store original methods
+    const abortController = new AbortController();
+    const logIt = (url: string) => {
+      if (!abortController.signal.aborted) {
+        cb({
+          url,
+        });
+      }
+    };
+
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+
+    // Override pushState
+    history.pushState = function (...args: Parameters<typeof history.pushState>) {
+      originalPushState.apply(history, args);
+      logIt(window.location.href);
+    };
+
+    // Override replaceState
+    history.replaceState = function (...args: Parameters<typeof history.replaceState>) {
+      originalReplaceState.apply(history, args);
+      logIt(window.location.href);
+    };
+
+    // Listen for popstate (back/forward buttons)
+    window.addEventListener(
+      "popstate",
+      function (event) {
+        logIt(window.location.href);
+      },
+      {
+        signal: abortController.signal,
+      },
+    );
+
+    return () => {
+      abortController.abort();
+    };
+  },
+  options: {},
 };
 
 class ClientRecorder {
@@ -81,6 +129,7 @@ class ClientRecorder {
       ignoreClass: options.ignoreClass || "complyco-ignore",
       maskTextClass: options.maskTextClass || "complyco-mask",
       recordCanvas: false,
+      plugins: options.captureNavigation ? [navigationPlugin] : [],
 
       emit(event) {
         _this.#eventSaver.addEvent({
