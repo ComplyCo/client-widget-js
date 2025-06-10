@@ -9,6 +9,7 @@ type ClientRecorderOptions = {
 };
 
 type RecordOptions = {
+  maskAllInputs?: boolean;
   blockClass?: string;
   ignoreClass?: string;
   maskTextClass?: string;
@@ -75,7 +76,7 @@ class ClientRecorder {
         headMetaAuthorship: true,
         headMetaVerification: true,
       },
-      maskAllInputs: true,
+      maskAllInputs: options.maskAllInputs ?? true,
       blockClass: options.blockClass || "complyco-block",
       ignoreClass: options.ignoreClass || "complyco-ignore",
       maskTextClass: options.maskTextClass || "complyco-mask",
