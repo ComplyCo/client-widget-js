@@ -32,6 +32,8 @@ recorder.record({
   blockClass: "complyco-block",
   ignoreClass: "complyco-ignore",
   maskTextClass: "complyco-mask",
+  maskAllInputs: true,
+  captureNavigation: false,
 });
 
 // stops the recording and forces a sync to ComplyCO's backend.
@@ -40,6 +42,8 @@ recorder.shutdown();
 
 ### Masking
 
+All inputs are masked by default, but you can choose to unmask all inputs.
+
 You can configure the recorder with block, ignore and mask text classes, or you can use our defaults. Our defaults are:
 
 - complyco-block
@@ -47,6 +51,13 @@ You can configure the recorder with block, ignore and mask text classes, or you 
 - complyco-mask
 
 If your UI already has classes from Sentry's Replay functionality, you can just pass the appropriate class names when invoking `recorder.record(...)`.
+
+### Navigation
+
+The `captureNavigation` option allows you to track page navigation events within your single-page application. When enabled, it will record URL changes that occur through:
+- History API calls (`pushState`, `replaceState`)
+- Browser back/forward navigation
+- Hash changes
 
 ### Plugins
 
