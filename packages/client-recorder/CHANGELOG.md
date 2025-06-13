@@ -1,5 +1,12 @@
 # @complyco/client-recorder-web
 
+## 0.1.9
+
+### Patch Changes
+
+- 3437b8e: Make maskAllInputs configurable
+- 598555f: Add captureNavigation option
+
 ## 0.1.8
 
 ### Patch Changes
