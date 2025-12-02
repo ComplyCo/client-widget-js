@@ -1,6 +1,6 @@
 # Python dependencies for JWT examples
 pyjwt==2.8.0
-cryptography==41.0.7
+cryptography==44.0.1
 
 # Flask example dependencies (optional)
 flask==3.0.0
