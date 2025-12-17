@@ -56,6 +56,28 @@ To use the script in your application:
    )
    ```
 
+### Required JWT claims
+
+Include the standard claims (`iss`, `aud`, `iat`, `nbf`, `exp`) plus your user and application context. `business_external_id` is optional (include for business onboarding flows), and `application.product_id` is optional depending on if you already know it:
+
+```python
+token = generate_jwt_token(
+    private_key=PRIVATE_KEY,
+    claims={
+        "sub": "<user-id>",
+        "email": "<user-email>",
+        # Optional business context
+        "business_external_id": "<business-id>",
+        "application": {
+            "id": "<application_external_id>",
+            # Optional product id
+            "product_id": "<product_external_id>",
+            "institution_id": "<institution_external_id>",
+        },
+    },
+)
+```
+
 ### Generating Your Own Key Pair
 
 To generate a new RSA key pair for production use:

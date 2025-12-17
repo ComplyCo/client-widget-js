@@ -53,9 +53,24 @@ def get_complyco_jwt():
         user_data = get_user_from_session()
         app_data = get_application_data()
 
+        claims = {
+            "sub": user_data["user_id"],
+            "email": user_data["email"],
+            "application": {
+                "id": app_data["application_id"],
+                "institution_id": app_data["institution_id"],
+            }
+        }
+
+        if user_data.get("business_external_id"):
+            claims["business_external_id"] = user_data["business_external_id"]
+        if app_data.get("product_id"):
+            claims["application"]["product_id"] = app_data["product_id"]
+
         token = generate_jwt_token(
             private_key=PRIVATE_KEY,
-            expiration_minutes=60
+            expiration_minutes=60,
+            claims=claims,
         )
 
         return jsonify({
@@ -81,7 +96,8 @@ def get_user_from_session():
 
     return {
         'user_id': 'user_12345',
-        'email': 'user@example.com'
+        'email': 'user@example.com',
+        'business_external_id': 'biz_6789',  # optional
     }
 
 
@@ -94,7 +110,7 @@ def get_application_data():
 
     return {
         'application_id': 'ext_app_001',
-        'product_id': 'deposit',
+        'product_id': 'deposit',  # optional
         'institution_id': 'bank_a'
     }
 

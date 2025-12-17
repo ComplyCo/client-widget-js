@@ -7,12 +7,13 @@ using RSA public/private key cryptography (RS256 algorithm).
 
 import jwt
 import datetime
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 
 def generate_jwt_token(
     private_key: str,
-    expiration_minutes: int = 60
+    expiration_minutes: int = 60,
+    claims: Optional[Dict[str, Any]] = None
 ) -> str:
     """
     Generate a JWT token signed with an RSA private key.
@@ -20,6 +21,7 @@ def generate_jwt_token(
     Args:
         private_key: RSA private key in PEM format
         expiration_minutes: Token expiration time in minutes (default: 60)
+        claims: Optional overrides/additional claims to merge into the payload
 
     Returns:
         A signed JWT token string
@@ -28,7 +30,18 @@ def generate_jwt_token(
         >>> private_key = open('private_key.pem').read()
         >>> token = generate_jwt_token(
         ...     private_key=private_key,
-        ...     expiration_minutes=60
+        ...     expiration_minutes=60,
+        ...     claims={
+        ...         "sub": "<user-id>",
+        ...         "email": "<user-email>",
+        ...         # Optional business/application attributes:
+        ...         "business_external_id": "<business-id>",
+        ...         "application": {
+        ...             "id": "<application_external_id>",
+        ...             # "product_id": "<product_external_id>",
+        ...             "institution_id": "<institution_external_id>",
+        ...         },
+        ...     }
         ... )
     """
     now = datetime.datetime.now(datetime.UTC)
@@ -47,10 +60,20 @@ def generate_jwt_token(
         "email": "<user email from your session>",
         "application" : {
             "id": "<application_external_id>", # External Application ID from your system
-            "product_id": "<product_external_id>", # e.g. "deposit" from app.complyco.com/configuration/financialProducts
             "institution_id": "<institution_external_id>", #  e.g. "bank_a" from app.complyco.com/configuration/institutions
         }
     }
+
+    if claims:
+        payload = {
+            **payload,
+            **{k: v for k, v in claims.items() if k != "application"},
+        }
+        if isinstance(claims.get("application"), dict):
+            payload["application"] = {
+                **payload.get("application", {}),
+                **claims["application"],
+            }
 
     # Generate the JWT token using RS256 algorithm
     token = jwt.encode(

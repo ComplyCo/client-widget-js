@@ -72,7 +72,17 @@ def main():
     # Generate the token
     token = generate_jwt_token(
         private_key=PRIVATE_KEY,
-        expiration_minutes=60
+        expiration_minutes=60,
+        claims={
+            "sub": "user_12345",
+            "email": "user@example.com",
+            "business_external_id": "biz_6789",  # optional
+            "application": {
+                "id": "ext_app_001",
+                "product_id": "deposit",  # optional
+                "institution_id": "bank_a",
+            }
+        }
     )
 
     print("Generated JWT Token:")
