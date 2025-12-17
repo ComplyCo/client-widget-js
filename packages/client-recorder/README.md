@@ -43,6 +43,7 @@ recorder.shutdown();
 ### Masking
 
 All inputs are masked by default, but you can choose to unmask all inputs.
+With `maskAllInputs` set to `true` (the default), mark any fields you want left unmasked with `data-complyco-unmask="true"` or the `complyco-unmask` class (e.g. `<input class="complyco-unmask">` or `<select data-complyco-unmask="true">`). Use this to keep specific non-sensitive fields visible (for example, a product name dropdown) while keeping everything else masked.
 
 You can configure the recorder with block, ignore and mask text classes, or you can use our defaults. Our defaults are:
 

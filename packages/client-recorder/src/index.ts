@@ -9,6 +9,20 @@ type ClientRecorderOptions = {
   syncOptions: Omit<EventSaverOptions, "pageloadId">;
 };
 
+export type MaskInputFn = (text: string | null | undefined, element?: HTMLElement | null) => string;
+export const unmaskComplyCoTaggedElements: MaskInputFn = (value, element) => {
+  const safeValue = value ?? "";
+
+  if (
+    element instanceof HTMLElement &&
+    (element.dataset.complycoUnmask === "true" || element.classList.contains("complyco-unmask"))
+  ) {
+    return safeValue;
+  }
+
+  return "*".repeat(safeValue.length);
+};
+
 type RecordOptions = {
   maskAllInputs?: boolean;
   blockClass?: string;
@@ -91,6 +105,8 @@ class ClientRecorder {
       return;
     }
 
+    const maskAllInputs = options.maskAllInputs ?? true;
+    const maskInputFn = maskAllInputs ? unmaskComplyCoTaggedElements : undefined;
     const _this = this;
 
     this.#abortController = new AbortController();
@@ -124,10 +140,11 @@ class ClientRecorder {
         headMetaAuthorship: true,
         headMetaVerification: true,
       },
-      maskAllInputs: options.maskAllInputs ?? true,
+      maskAllInputs,
       blockClass: options.blockClass || "complyco-block",
       ignoreClass: options.ignoreClass || "complyco-ignore",
       maskTextClass: options.maskTextClass || "complyco-mask",
+      maskInputFn,
       recordCanvas: false,
       plugins: options.captureNavigation ? [navigationPlugin] : [],
 
