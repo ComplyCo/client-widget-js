@@ -19,8 +19,8 @@ from jwt_utils import generate_jwt_token
 
 
 app = FastAPI(
-    title="ComplyKo JWT Token Service",
-    description="API for generating JWT tokens for ComplyKo authentication",
+    title="ComplyCo JWT Token Service",
+    description="API for generating JWT tokens for ComplyCo authentication",
     version="1.0.0"
 )
 
@@ -55,7 +55,7 @@ dnIrOS+ZG9PoJKWKF5JjEQ==
 -----END PRIVATE KEY-----"""
 
 
-@app.get("/api/complyco-jwt", summary="Generate ComplyKo JWT Token")
+@app.get("/api/complyco-jwt", summary="Generate ComplyCo JWT Token")
 async def get_complyco_jwt(
     request: Request,
     authorization: Optional[str] = Header(None)
@@ -129,7 +129,7 @@ def get_application_data(request: Request) -> dict:
 @app.get("/")
 async def root():
     return {
-        "message": "ComplyKo JWT Token Service",
+        "message": "ComplyCo JWT Token Service",
         "endpoints": {
             "jwt_token": "/api/complyco-jwt",
             "docs": "/docs",
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     import uvicorn
 
     print("=" * 70)
-    print("ComplyKo JWT Token Service - FastAPI")
+    print("ComplyCo JWT Token Service - FastAPI")
     print("=" * 70)
     print("\nAPI Docs: http://localhost:8000/docs")
     print("JWT Endpoint: http://localhost:8000/api/complyco-jwt")

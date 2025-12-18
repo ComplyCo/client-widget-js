@@ -118,7 +118,7 @@ def get_application_data():
 @app.route('/')
 def index():
     return jsonify({
-        'message': 'ComplyKo JWT Token Service',
+        'message': 'ComplyCo JWT Token Service',
         'endpoints': {
             'jwt_token': '/api/complyco-jwt',
             'health': '/health'
@@ -133,7 +133,7 @@ def health():
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("ComplyKo JWT Token Service - Flask")
+    print("ComplyCo JWT Token Service - Flask")
     print("=" * 70)
     print("\nJWT Endpoint: http://localhost:5000/api/complyco-jwt")
     print("\nPress CTRL+C to stop\n")
