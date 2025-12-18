@@ -1,6 +1,6 @@
 {
   "name": "@complyco/client-documents-web",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "description": "ComplyCo's client web document widget",
   "repository": "https://github.com/ComplyCo/client-widget-js",
   "contributors": [

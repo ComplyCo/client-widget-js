@@ -1,5 +1,16 @@
 # @complyco/client-recorder-web
 
+## 0.2.0
+
+### Minor Changes
+
+- e423999: Keep complyco-unmask tagged fields visible while others stay masked.
+
+### Patch Changes
+
+- 6789a83: Upgrade form-data npm package
+- 5803fcb: Upgrade @changesets/cli to v2.28.1
+
 ## 0.1.9
 
 ### Patch Changes

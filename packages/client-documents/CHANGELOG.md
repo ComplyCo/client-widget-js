@@ -1,5 +1,12 @@
 # @complyco/client-documents-web
 
+## 5.2.2
+
+### Patch Changes
+
+- 6789a83: Upgrade form-data npm package
+- 5803fcb: Upgrade @changesets/cli to v2.28.1
+
 ## 5.2.1
 
 ### Patch Changes
