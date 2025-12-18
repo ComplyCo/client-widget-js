@@ -56,6 +56,7 @@ If your UI already has classes from Sentry's Replay functionality, you can just 
 ### Navigation
 
 The `captureNavigation` option allows you to track page navigation events within your single-page application. When enabled, it will record URL changes that occur through:
+
 - History API calls (`pushState`, `replaceState`)
 - Browser back/forward navigation
 - Hash changes

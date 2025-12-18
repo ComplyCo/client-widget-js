@@ -40,9 +40,9 @@ This will:
 To use the script in your application:
 
 1. **Replace the example keys** with your own RSA key pair:
-    - Generate your keys using OpenSSL or your preferred tool
-    - Keep your private key secure
-    - Share your public key with our API service
+   - Generate your keys using OpenSSL or your preferred tool
+   - Keep your private key secure
+   - Share your public key with our API service
 
 2. **Use the token in your Frontend API requests**:
 
