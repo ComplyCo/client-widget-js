@@ -51,7 +51,7 @@
     "@babel/runtime": "^7.27.0",
     "@rrweb/record": "2.0.0-alpha.18",
     "fflate": "^0.8.2",
-    "uuid": "^11.1.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
